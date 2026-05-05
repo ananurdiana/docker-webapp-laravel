@@ -62,3 +62,26 @@ services:
     # 🔥 Resource limit
     mem_limit: 512m
     cpus: "0.50"
+
+  worker:
+    build: 
+      context: ./docker-image/app/
+      dockerfile: Dockerfile
+    container_name: worker
+    image: ${IMAGE_NAME}:${IMAGE_VERSION}
+    restart: always
+    volumes:
+      - ./app:/app
+      - ./data/app_storage:/app/storage
+      - ./data/app_bootstrap_cache:/app/bootstrap/cache
+    depends_on:
+      - app
+      - database
+
+    command: >
+      sh -c "
+        php artisan app:test-worker
+      "
+
+    mem_limit: 256m
+    cpus: "0.25"

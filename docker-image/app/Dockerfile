@@ -7,7 +7,6 @@ WORKDIR /app
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     bash \
-    git \
     curl \
     libpng-dev \
     libjpeg62-turbo-dev \
@@ -61,6 +60,19 @@ RUN apt-get update && apt-get install -y $PHPIZE_DEPS \
 
 # Install Composer dari image resmi
 COPY --from=composer:2.8.6 /usr/bin/composer /usr/bin/composer
+
+# Argument untuk UID/GID agar bisa sinkron dengan host (default 1000)
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+
+# Membuat group dan user 'developer'
+RUN groupadd -g ${GROUP_ID} developer && \
+    useradd -l -u ${USER_ID} -g developer -m developer && \
+    # Pastikan direktori /app dimiliki oleh developer
+    chown -R developer:developer /app
+
+# Switch ke user developer
+USER developer
 
 # Expose port php-fpm
 EXPOSE 9000

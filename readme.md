@@ -17,34 +17,13 @@ A modern Docker boilerplate for Laravel applications with PostgreSQL, Nginx, and
 - Laravel 13.x application framework
 - PostgreSQL 17 database
 - Nginx 1.26.3+ web server
-- PHP 8.3.19 / PHP 8.4.17 runtime
+- PHP PHP 8.4.17 runtime
 - Node.js v22.14.0 for frontend assets
 - PM2 process manager for Node.js applications
 - Docker-based development and deployment
 - Environment-based configuration
 
 ## System Requirements
-
-### Operating System
-- Ubuntu 24.04 LTS
-
-### Application Server (VM APP)
-- 2 vCPUs
-- 4 GB RAM
-- 100 GB Storage
-
-### Database Server (VM DB)
-- 4 vCPUs
-- 4 GB RAM
-- 150 GB Storage
-
-### Required Software
-- **Node.js**: v22.14.0 (Runtime JS)
-- **PHP**: 8.3.19 / 8.4.17 (Runtime backend PHP)
-- **PM2**: 6.0.14 or above (Process manager)
-- **PostgreSQL**: 17 (Database)
-- **Nginx**: 1.26.3 or above (Web server)
-- **Composer**: 2.8.6 or above (Package Manager PHP)
 
 ## Installation
 
@@ -174,55 +153,6 @@ PDO::getAvailableDrivers();
 - Database data persisted in named volumes
 - Node.js modules cached in volumes
 
-## Environment Variables
-
-### Required Variables
-```env
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=
-APP_DEBUG=true
-APP_URL=http://localhost
-
-DB_CONNECTION=pgsql
-DB_HOST=database
-DB_PORT=5432
-DB_DATABASE=app
-DB_USERNAME=app
-DB_PASSWORD=app
-
-BROADCAST_DRIVER=log
-CACHE_DRIVER=redis
-QUEUE_CONNECTION=redis
-SESSION_DRIVER=redis
-SESSION_LIFETIME=120
-
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_MAILER=smtp
-MAIL_HOST=mailhog
-MAIL_PORT=1025
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS=null
-MAIL_FROM_NAME="${APP_NAME}"
-
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=
-
-PUSHER_APP_ID=
-PUSHER_APP_KEY=
-PUSHER_APP_SECRET=
-PUSHER_APP_CLUSTER=mt1
-
-MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
-```
 
 ## Contributing
 

@@ -154,6 +154,13 @@ docker compose exec app php artisan config:clear
 docker compose exec app php artisan cache:clear
 ```
 
+### Cek Semua Driver Database yang Aktif
+
+Jika Anda ingin melihat driver database apa saja yang didukung oleh PDO saat ini, pada `php artisan tinker`jalankan:
+```php
+PDO::getAvailableDrivers();
+```
+
 ## Docker Setup
 
 ### Services Included

@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     gnupg \
+    sqlite3 libsqlite3-dev \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -33,6 +34,9 @@ RUN docker-php-ext-install \
     pdo \
     pdo_pgsql \
     pgsql \
+    pdo_mysql \
+    mysqli \
+    pdo_sqlite \
     mbstring \
     exif \
     pcntl \
@@ -41,11 +45,18 @@ RUN docker-php-ext-install \
     zip \
     intl
 
-# Install NodeJS v22.14.0
+# Install NodeJS v23.x
 RUN curl -fsSL https://deb.nodesource.com/setup_23.x | bash - \
     && apt-get update \
     && apt-get install -y nodejs \
     && npm install -g npm@latest pm2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Redis extension
+RUN apt-get update && apt-get install -y $PHPIZE_DEPS \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && apt-get purge -y --auto-remove $PHPIZE_DEPS \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Composer dari image resmi

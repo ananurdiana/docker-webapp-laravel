@@ -17,11 +17,11 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     zlib1g-dev \
     zip \
+    ghostscript \
     unzip \
     gnupg \
     sqlite3 libsqlite3-dev \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+    ca-certificates 
 
 # Configure GD
 RUN docker-php-ext-configure gd \
@@ -48,15 +48,16 @@ RUN docker-php-ext-install \
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get update \
     && apt-get install -y nsolid \
-    && npm install -g npm@latest pm2 \
-    && rm -rf /var/lib/apt/lists/*
+    && npm install -g npm@latest pm2 
 
 # Install Redis extension
 RUN apt-get update && apt-get install -y $PHPIZE_DEPS \
     && pecl install redis \
     && docker-php-ext-enable redis \
-    && apt-get purge -y --auto-remove $PHPIZE_DEPS \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get purge -y --auto-remove $PHPIZE_DEPS 
+
+# Bersihkan cache
+RUN rm -rf /var/lib/apt/lists/*
 
 # Install Composer dari image resmi
 COPY --from=composer:2.3.8 /usr/bin/composer /usr/bin/composer

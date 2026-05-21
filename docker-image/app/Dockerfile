@@ -17,8 +17,9 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     zlib1g-dev \
     zip \
-    ghostscript \
     unzip \
+    ghostscript \
+    git \
     gnupg \
     sqlite3 libsqlite3-dev \
     ca-certificates
